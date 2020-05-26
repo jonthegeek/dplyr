@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -85,7 +89,7 @@ per group and one column per grouping variable." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -100,16 +104,16 @@ per group and one column per grouping variable." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">dplyr</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9003</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/dplyr.html">Intro</a>
+  <a href="../articles/dplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -122,19 +126,28 @@ per group and one column per grouping variable." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/grouping.html">Grouped data</a>
+    </li>
+    <li>
       <a href="../articles/two-table.html">Two-table verbs</a>
     </li>
     <li>
-      <a href="../articles/window-functions.html">Window functions</a>
+      <a href="../articles/base.html">dplyr &lt;-&gt; base R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Automation</li>
+    <li>
+      <a href="../articles/colwise.html">Column-wise operations</a>
     </li>
     <li>
-      <a href="http://dbplyr.tidyverse.org/articles/dbplyr.html">Databases with dbplyr</a>
+      <a href="../articles/rowwise.html">Row-wise operations</a>
     </li>
     <li>
       <a href="../articles/programming.html">Programming with dplyr</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../articles/compatibility.html">Compatibility</a>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -145,7 +158,7 @@ per group and one column per grouping variable." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/10/dplyr-0-8-4/">Version 0.8.4</a>
     </li>
@@ -164,14 +177,15 @@ per group and one column per grouping variable." />
     <li>
       <a href="https://www.tidyverse.org/articles/2018/06/dplyr-0.7.5/">Version 0.7.5</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/dplyr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/dplyr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -212,7 +226,7 @@ loses information and is confusing.</p></li>
 per group and one column per grouping variable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>group_split</span>(<span class='no'>.tbl</span>, <span class='no'>...</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>group_split</span>(<span class='no'>.tbl</span>, <span class='no'>...</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,7 +240,7 @@ per group and one column per grouping variable.</p>
       <td><p>Grouping specification, forwarded to <code><a href='group_by.html'>group_by()</a></code></p></td>
     </tr>
     <tr>
-      <th>keep</th>
+      <th>.keep</th>
       <td><p>Should the grouping columns be kept</p></td>
     </tr>
     </table>
@@ -248,7 +262,7 @@ all the columns, including the grouping variables.</p></li>
 <p>The primary use case for <code>group_split()</code> is with already grouped data frames,
 typically a result of <code><a href='group_by.html'>group_by()</a></code>. In this case <code>group_split()</code> only uses
 the first argument, the grouped tibble, and warns when <code>...</code> is used.</p>
-<p>Because some of these groups may be empty, it is best paried with <code><a href='group_data.html'>group_keys()</a></code>
+<p>Because some of these groups may be empty, it is best paired with <code><a href='group_data.html'>group_keys()</a></code>
 which identifies the representatives of each grouping variable for the group.</p>
     <h2 class="hasAnchor" id="ungrouped-data-frames"><a class="anchor" href="#ungrouped-data-frames"></a>Ungrouped data frames</h2>
 
@@ -288,58 +302,58 @@ other, because otherwise the grouping algorithm is performed each time.</p>
 #&gt;   &gt;
 #&gt; &gt;[3]&gt;
 #&gt; [[1]]
-#&gt; # A tibble: 50 x 5
+#&gt; <span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-#&gt;  1          5.1         3.5          1.4         0.2 setosa 
-#&gt;  2          4.9         3            1.4         0.2 setosa 
-#&gt;  3          4.7         3.2          1.3         0.2 setosa 
-#&gt;  4          4.6         3.1          1.5         0.2 setosa 
-#&gt;  5          5           3.6          1.4         0.2 setosa 
-#&gt;  6          5.4         3.9          1.7         0.4 setosa 
-#&gt;  7          4.6         3.4          1.4         0.3 setosa 
-#&gt;  8          5           3.4          1.5         0.2 setosa 
-#&gt;  9          4.4         2.9          1.4         0.2 setosa 
-#&gt; 10          4.9         3.1          1.5         0.1 setosa 
-#&gt; # … with 40 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'> 1</span><span>          5.1         3.5          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 2</span><span>          4.9         3            1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 3</span><span>          4.7         3.2          1.3         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 4</span><span>          4.6         3.1          1.5         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 5</span><span>          5           3.6          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 6</span><span>          5.4         3.9          1.7         0.4 setosa 
+#&gt; </span><span style='color: #555555;'> 7</span><span>          4.6         3.4          1.4         0.3 setosa 
+#&gt; </span><span style='color: #555555;'> 8</span><span>          5           3.4          1.5         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 9</span><span>          4.4         2.9          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'>10</span><span>          4.9         3.1          1.5         0.1 setosa 
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span>
 #&gt; 
 #&gt; [[2]]
-#&gt; # A tibble: 50 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
-#&gt;  1          7           3.2          4.7         1.4 versicolor
-#&gt;  2          6.4         3.2          4.5         1.5 versicolor
-#&gt;  3          6.9         3.1          4.9         1.5 versicolor
-#&gt;  4          5.5         2.3          4           1.3 versicolor
-#&gt;  5          6.5         2.8          4.6         1.5 versicolor
-#&gt;  6          5.7         2.8          4.5         1.3 versicolor
-#&gt;  7          6.3         3.3          4.7         1.6 versicolor
-#&gt;  8          4.9         2.4          3.3         1   versicolor
-#&gt;  9          6.6         2.9          4.6         1.3 versicolor
-#&gt; 10          5.2         2.7          3.9         1.4 versicolor
-#&gt; # … with 40 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'> 1</span><span>          7           3.2          4.7         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 2</span><span>          6.4         3.2          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 3</span><span>          6.9         3.1          4.9         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 4</span><span>          5.5         2.3          4           1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 5</span><span>          6.5         2.8          4.6         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 6</span><span>          5.7         2.8          4.5         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 7</span><span>          6.3         3.3          4.7         1.6 versicolor
+#&gt; </span><span style='color: #555555;'> 8</span><span>          4.9         2.4          3.3         1   versicolor
+#&gt; </span><span style='color: #555555;'> 9</span><span>          6.6         2.9          4.6         1.3 versicolor
+#&gt; </span><span style='color: #555555;'>10</span><span>          5.2         2.7          3.9         1.4 versicolor
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span>
 #&gt; 
 #&gt; [[3]]
-#&gt; # A tibble: 50 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species  
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;    
-#&gt;  1          6.3         3.3          6           2.5 virginica
-#&gt;  2          5.8         2.7          5.1         1.9 virginica
-#&gt;  3          7.1         3            5.9         2.1 virginica
-#&gt;  4          6.3         2.9          5.6         1.8 virginica
-#&gt;  5          6.5         3            5.8         2.2 virginica
-#&gt;  6          7.6         3            6.6         2.1 virginica
-#&gt;  7          4.9         2.5          4.5         1.7 virginica
-#&gt;  8          7.3         2.9          6.3         1.8 virginica
-#&gt;  9          6.7         2.5          5.8         1.8 virginica
-#&gt; 10          7.2         3.6          6.1         2.5 virginica
-#&gt; # … with 40 more rows
-#&gt; </div><div class='input'><span class='fu'><a href='group_data.html'>group_keys</a></span>(<span class='no'>ir</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 1
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'> 1</span><span>          6.3         3.3          6           2.5 virginica
+#&gt; </span><span style='color: #555555;'> 2</span><span>          5.8         2.7          5.1         1.9 virginica
+#&gt; </span><span style='color: #555555;'> 3</span><span>          7.1         3            5.9         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 4</span><span>          6.3         2.9          5.6         1.8 virginica
+#&gt; </span><span style='color: #555555;'> 5</span><span>          6.5         3            5.8         2.2 virginica
+#&gt; </span><span style='color: #555555;'> 6</span><span>          7.6         3            6.6         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 7</span><span>          4.9         2.5          4.5         1.7 virginica
+#&gt; </span><span style='color: #555555;'> 8</span><span>          7.3         2.9          6.3         1.8 virginica
+#&gt; </span><span style='color: #555555;'> 9</span><span>          6.7         2.5          5.8         1.8 virginica
+#&gt; </span><span style='color: #555555;'>10</span><span>          7.2         3.6          6.1         2.5 virginica
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span>
+#&gt; </div><div class='input'><span class='fu'><a href='group_data.html'>group_keys</a></span>(<span class='no'>ir</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
 #&gt;   Species   
-#&gt; * &lt;fct&gt;     
-#&gt; 1 setosa    
-#&gt; 2 versicolor
-#&gt; 3 virginica </div><div class='input'>
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> setosa    
+#&gt; </span><span style='color: #555555;'>2</span><span> versicolor
+#&gt; </span><span style='color: #555555;'>3</span><span> virginica </div><div class='input'>
 <span class='co'># this can be useful if the grouped data has been altered before the split</span>
 <span class='no'>ir</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
@@ -355,58 +369,58 @@ other, because otherwise the grouping algorithm is performed each time.</p>
 #&gt;   &gt;
 #&gt; &gt;[3]&gt;
 #&gt; [[1]]
-#&gt; # A tibble: 22 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 22 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-#&gt;  1          5.1         3.5          1.4         0.2 setosa 
-#&gt;  2          5.4         3.9          1.7         0.4 setosa 
-#&gt;  3          5.4         3.7          1.5         0.2 setosa 
-#&gt;  4          5.8         4            1.2         0.2 setosa 
-#&gt;  5          5.7         4.4          1.5         0.4 setosa 
-#&gt;  6          5.4         3.9          1.3         0.4 setosa 
-#&gt;  7          5.1         3.5          1.4         0.3 setosa 
-#&gt;  8          5.7         3.8          1.7         0.3 setosa 
-#&gt;  9          5.1         3.8          1.5         0.3 setosa 
-#&gt; 10          5.4         3.4          1.7         0.2 setosa 
-#&gt; # … with 12 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'> 1</span><span>          5.1         3.5          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 2</span><span>          5.4         3.9          1.7         0.4 setosa 
+#&gt; </span><span style='color: #555555;'> 3</span><span>          5.4         3.7          1.5         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 4</span><span>          5.8         4            1.2         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 5</span><span>          5.7         4.4          1.5         0.4 setosa 
+#&gt; </span><span style='color: #555555;'> 6</span><span>          5.4         3.9          1.3         0.4 setosa 
+#&gt; </span><span style='color: #555555;'> 7</span><span>          5.1         3.5          1.4         0.3 setosa 
+#&gt; </span><span style='color: #555555;'> 8</span><span>          5.7         3.8          1.7         0.3 setosa 
+#&gt; </span><span style='color: #555555;'> 9</span><span>          5.1         3.8          1.5         0.3 setosa 
+#&gt; </span><span style='color: #555555;'>10</span><span>          5.4         3.4          1.7         0.2 setosa 
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; 
 #&gt; [[2]]
-#&gt; # A tibble: 24 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 24 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
-#&gt;  1          7           3.2          4.7         1.4 versicolor
-#&gt;  2          6.4         3.2          4.5         1.5 versicolor
-#&gt;  3          6.9         3.1          4.9         1.5 versicolor
-#&gt;  4          6.5         2.8          4.6         1.5 versicolor
-#&gt;  5          6.3         3.3          4.7         1.6 versicolor
-#&gt;  6          6.6         2.9          4.6         1.3 versicolor
-#&gt;  7          6           2.2          4           1   versicolor
-#&gt;  8          6.1         2.9          4.7         1.4 versicolor
-#&gt;  9          6.7         3.1          4.4         1.4 versicolor
-#&gt; 10          6.2         2.2          4.5         1.5 versicolor
-#&gt; # … with 14 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'> 1</span><span>          7           3.2          4.7         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 2</span><span>          6.4         3.2          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 3</span><span>          6.9         3.1          4.9         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 4</span><span>          6.5         2.8          4.6         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 5</span><span>          6.3         3.3          4.7         1.6 versicolor
+#&gt; </span><span style='color: #555555;'> 6</span><span>          6.6         2.9          4.6         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 7</span><span>          6           2.2          4           1   versicolor
+#&gt; </span><span style='color: #555555;'> 8</span><span>          6.1         2.9          4.7         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 9</span><span>          6.7         3.1          4.4         1.4 versicolor
+#&gt; </span><span style='color: #555555;'>10</span><span>          6.2         2.2          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span>
 #&gt; 
 #&gt; [[3]]
-#&gt; # A tibble: 22 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 22 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species  
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;    
-#&gt;  1          7.1         3            5.9         2.1 virginica
-#&gt;  2          7.6         3            6.6         2.1 virginica
-#&gt;  3          7.3         2.9          6.3         1.8 virginica
-#&gt;  4          6.7         2.5          5.8         1.8 virginica
-#&gt;  5          7.2         3.6          6.1         2.5 virginica
-#&gt;  6          6.8         3            5.5         2.1 virginica
-#&gt;  7          7.7         3.8          6.7         2.2 virginica
-#&gt;  8          7.7         2.6          6.9         2.3 virginica
-#&gt;  9          6.9         3.2          5.7         2.3 virginica
-#&gt; 10          7.7         2.8          6.7         2   virginica
-#&gt; # … with 12 more rows
-#&gt; </div><div class='input'><span class='fu'><a href='group_data.html'>group_keys</a></span>(<span class='no'>ir</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 1
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'> 1</span><span>          7.1         3            5.9         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 2</span><span>          7.6         3            6.6         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 3</span><span>          7.3         2.9          6.3         1.8 virginica
+#&gt; </span><span style='color: #555555;'> 4</span><span>          6.7         2.5          5.8         1.8 virginica
+#&gt; </span><span style='color: #555555;'> 5</span><span>          7.2         3.6          6.1         2.5 virginica
+#&gt; </span><span style='color: #555555;'> 6</span><span>          6.8         3            5.5         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 7</span><span>          7.7         3.8          6.7         2.2 virginica
+#&gt; </span><span style='color: #555555;'> 8</span><span>          7.7         2.6          6.9         2.3 virginica
+#&gt; </span><span style='color: #555555;'> 9</span><span>          6.9         3.2          5.7         2.3 virginica
+#&gt; </span><span style='color: #555555;'>10</span><span>          7.7         2.8          6.7         2   virginica
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
+#&gt; </div><div class='input'><span class='fu'><a href='group_data.html'>group_keys</a></span>(<span class='no'>ir</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
 #&gt;   Species   
-#&gt;   &lt;fct&gt;     
-#&gt; 1 setosa    
-#&gt; 2 versicolor
-#&gt; 3 virginica </div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> setosa    
+#&gt; </span><span style='color: #555555;'>2</span><span> versicolor
+#&gt; </span><span style='color: #555555;'>3</span><span> virginica </div><div class='input'>
 <span class='co'># ----- use case 2: using a group_by() grouping specification</span>
 
 <span class='co'># both group_split() and group_keys() have to perform the grouping</span>
@@ -422,76 +436,68 @@ other, because otherwise the grouping algorithm is performed each time.</p>
 #&gt;   &gt;
 #&gt; &gt;[3]&gt;
 #&gt; [[1]]
-#&gt; # A tibble: 50 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-#&gt;  1          5.1         3.5          1.4         0.2 setosa 
-#&gt;  2          4.9         3            1.4         0.2 setosa 
-#&gt;  3          4.7         3.2          1.3         0.2 setosa 
-#&gt;  4          4.6         3.1          1.5         0.2 setosa 
-#&gt;  5          5           3.6          1.4         0.2 setosa 
-#&gt;  6          5.4         3.9          1.7         0.4 setosa 
-#&gt;  7          4.6         3.4          1.4         0.3 setosa 
-#&gt;  8          5           3.4          1.5         0.2 setosa 
-#&gt;  9          4.4         2.9          1.4         0.2 setosa 
-#&gt; 10          4.9         3.1          1.5         0.1 setosa 
-#&gt; # … with 40 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'> 1</span><span>          5.1         3.5          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 2</span><span>          4.9         3            1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 3</span><span>          4.7         3.2          1.3         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 4</span><span>          4.6         3.1          1.5         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 5</span><span>          5           3.6          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 6</span><span>          5.4         3.9          1.7         0.4 setosa 
+#&gt; </span><span style='color: #555555;'> 7</span><span>          4.6         3.4          1.4         0.3 setosa 
+#&gt; </span><span style='color: #555555;'> 8</span><span>          5           3.4          1.5         0.2 setosa 
+#&gt; </span><span style='color: #555555;'> 9</span><span>          4.4         2.9          1.4         0.2 setosa 
+#&gt; </span><span style='color: #555555;'>10</span><span>          4.9         3.1          1.5         0.1 setosa 
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span>
 #&gt; 
 #&gt; [[2]]
-#&gt; # A tibble: 50 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
-#&gt;  1          7           3.2          4.7         1.4 versicolor
-#&gt;  2          6.4         3.2          4.5         1.5 versicolor
-#&gt;  3          6.9         3.1          4.9         1.5 versicolor
-#&gt;  4          5.5         2.3          4           1.3 versicolor
-#&gt;  5          6.5         2.8          4.6         1.5 versicolor
-#&gt;  6          5.7         2.8          4.5         1.3 versicolor
-#&gt;  7          6.3         3.3          4.7         1.6 versicolor
-#&gt;  8          4.9         2.4          3.3         1   versicolor
-#&gt;  9          6.6         2.9          4.6         1.3 versicolor
-#&gt; 10          5.2         2.7          3.9         1.4 versicolor
-#&gt; # … with 40 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'> 1</span><span>          7           3.2          4.7         1.4 versicolor
+#&gt; </span><span style='color: #555555;'> 2</span><span>          6.4         3.2          4.5         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 3</span><span>          6.9         3.1          4.9         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 4</span><span>          5.5         2.3          4           1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 5</span><span>          6.5         2.8          4.6         1.5 versicolor
+#&gt; </span><span style='color: #555555;'> 6</span><span>          5.7         2.8          4.5         1.3 versicolor
+#&gt; </span><span style='color: #555555;'> 7</span><span>          6.3         3.3          4.7         1.6 versicolor
+#&gt; </span><span style='color: #555555;'> 8</span><span>          4.9         2.4          3.3         1   versicolor
+#&gt; </span><span style='color: #555555;'> 9</span><span>          6.6         2.9          4.6         1.3 versicolor
+#&gt; </span><span style='color: #555555;'>10</span><span>          5.2         2.7          3.9         1.4 versicolor
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span>
 #&gt; 
 #&gt; [[3]]
-#&gt; # A tibble: 50 x 5
+#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species  
-#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;    
-#&gt;  1          6.3         3.3          6           2.5 virginica
-#&gt;  2          5.8         2.7          5.1         1.9 virginica
-#&gt;  3          7.1         3            5.9         2.1 virginica
-#&gt;  4          6.3         2.9          5.6         1.8 virginica
-#&gt;  5          6.5         3            5.8         2.2 virginica
-#&gt;  6          7.6         3            6.6         2.1 virginica
-#&gt;  7          4.9         2.5          4.5         1.7 virginica
-#&gt;  8          7.3         2.9          6.3         1.8 virginica
-#&gt;  9          6.7         2.5          5.8         1.8 virginica
-#&gt; 10          7.2         3.6          6.1         2.5 virginica
-#&gt; # … with 40 more rows
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'> 1</span><span>          6.3         3.3          6           2.5 virginica
+#&gt; </span><span style='color: #555555;'> 2</span><span>          5.8         2.7          5.1         1.9 virginica
+#&gt; </span><span style='color: #555555;'> 3</span><span>          7.1         3            5.9         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 4</span><span>          6.3         2.9          5.6         1.8 virginica
+#&gt; </span><span style='color: #555555;'> 5</span><span>          6.5         3            5.8         2.2 virginica
+#&gt; </span><span style='color: #555555;'> 6</span><span>          7.6         3            6.6         2.1 virginica
+#&gt; </span><span style='color: #555555;'> 7</span><span>          4.9         2.5          4.5         1.7 virginica
+#&gt; </span><span style='color: #555555;'> 8</span><span>          7.3         2.9          6.3         1.8 virginica
+#&gt; </span><span style='color: #555555;'> 9</span><span>          6.7         2.5          5.8         1.8 virginica
+#&gt; </span><span style='color: #555555;'>10</span><span>          7.2         3.6          6.1         2.5 virginica
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span>
 #&gt; </div><div class='input'>
 <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='group_data.html'>group_keys</a></span>(<span class='no'>Species</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The `...` argument of `group_keys()` is deprecated as of dplyr 1.0.0.</span>
 #&gt; <span class='warning'>Please `group_by()` first</span>
-#&gt; <span class='warning'>This warning is displayed once per session.</span>
-#&gt; <span class='warning'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></div><div class='output co'>#&gt; # A tibble: 3 x 1
+#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 1</span><span>
 #&gt;   Species   
-#&gt; * &lt;fct&gt;     
-#&gt; 1 setosa    
-#&gt; 2 versicolor
-#&gt; 3 virginica </div></pre>
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> setosa    
+#&gt; </span><span style='color: #555555;'>2</span><span> versicolor
+#&gt; </span><span style='color: #555555;'>3</span><span> virginica </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#grouped-data-frames">Grouped data frames</a></li>
-      <li><a href="#ungrouped-data-frames">Ungrouped data frames</a></li>
-      <li><a href="#rowwise-data-frames">Rowwise data frames</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -52,7 +56,19 @@
 numeric values based on their position or their name, and character or factor
 values only by their name. This is an S3 generic: dplyr provides methods for
 numeric, character, and factors. For logical vectors, use if_else(). For
-more complicated criteria, use case_when()." />
+more complicated criteria, use case_when().
+You can use recode() directly with factors; it will preserve the existing
+order of levels while changing the values. Alternatively, you can
+use recode_factor(), which will change the order of levels to match
+the order of replacements. See the forcats
+package for more tools for working with factors and their levels.
+
+
+recode() is questioning because the arguments are in the wrong order.
+We have new &amp;lt;- old, mutate(df, new = old), and rename(df, new = old)
+but recode(x, old = new). We don't yet know how to fix this problem, but
+it's likely to involve creating a new function then retiring or deprecating
+recode()." />
 <meta property="og:image" content="https://dplyr.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -80,7 +96,7 @@ more complicated criteria, use case_when()." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,16 +111,16 @@ more complicated criteria, use case_when()." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">dplyr</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9003</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/dplyr.html">Intro</a>
+  <a href="../articles/dplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -117,19 +133,28 @@ more complicated criteria, use case_when()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/grouping.html">Grouped data</a>
+    </li>
+    <li>
       <a href="../articles/two-table.html">Two-table verbs</a>
     </li>
     <li>
-      <a href="../articles/window-functions.html">Window functions</a>
+      <a href="../articles/base.html">dplyr &lt;-&gt; base R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Automation</li>
+    <li>
+      <a href="../articles/colwise.html">Column-wise operations</a>
     </li>
     <li>
-      <a href="http://dbplyr.tidyverse.org/articles/dbplyr.html">Databases with dbplyr</a>
+      <a href="../articles/rowwise.html">Row-wise operations</a>
     </li>
     <li>
       <a href="../articles/programming.html">Programming with dplyr</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../articles/compatibility.html">Compatibility</a>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -140,7 +165,7 @@ more complicated criteria, use case_when()." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/10/dplyr-0-8-4/">Version 0.8.4</a>
     </li>
@@ -159,14 +184,15 @@ more complicated criteria, use case_when()." />
     <li>
       <a href="https://www.tidyverse.org/articles/2018/06/dplyr-0.7.5/">Version 0.7.5</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/dplyr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/dplyr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -200,6 +226,18 @@ numeric values based on their position or their name, and character or factor
 values only by their name. This is an S3 generic: dplyr provides methods for
 numeric, character, and factors. For logical vectors, use <code><a href='if_else.html'>if_else()</a></code>. For
 more complicated criteria, use <code><a href='case_when.html'>case_when()</a></code>.</p>
+<p>You can use <code>recode()</code> directly with factors; it will preserve the existing
+order of levels while changing the values. Alternatively, you can
+use <code>recode_factor()</code>, which will change the order of levels to match
+the order of replacements. See the <a href='http://forcats.tidyverse.org/'>forcats</a>
+package for more tools for working with factors and their levels.</p>
+<p><a href='https://www.tidyverse.org/lifecycle/#questioning'><img src='figures/lifecycle-questioning.svg' alt='Questioning lifecycle'></a>
+
+<code>recode()</code> is questioning because the arguments are in the wrong order.
+We have <code>new &lt;- old</code>, <code><a href='mutate.html'>mutate(df, new = old)</a></code>, and <code><a href='rename.html'>rename(df, new = old)</a></code>
+but <code>recode(x, old = new)</code>. We don't yet know how to fix this problem, but
+it's likely to involve creating a new function then retiring or deprecating
+<code>recode()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>recode</span>(<span class='no'>.x</span>, <span class='no'>...</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.missing</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
@@ -253,13 +291,6 @@ ordered factor.</p></td>
 the first of <code>...</code>, <code>.default</code>, or <code>.missing</code>.
 <code>recode_factor()</code> returns a factor whose levels are in the same order as
 in <code>...</code>. The levels in <code>.default</code> and <code>.missing</code> come last.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>You can use <code>recode()</code> directly with factors; it will preserve the existing
-order of levels while changing the values. Alternatively, you can
-use <code>recode_factor()</code>, which will change the order of levels to match
-the order of replacements. See the <a href='http://forcats.tidyverse.org/'>forcats</a>
-package for more tools for working with factors and their levels.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='na_if.html'>na_if()</a></code> to replace specified values with a <code>NA</code>.</p>
@@ -270,14 +301,14 @@ package for more tools for working with factors and their levels.</p>
     <pre class="examples"><div class='input'><span class='co'># For character values, recode values with named arguments only. Unmatched</span>
 <span class='co'># values are unchanged.</span>
 <span class='no'>char_vec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>), <span class='fl'>10</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>)</div><div class='output co'>#&gt;  [1] "c"     "Apple" "b"     "c"     "b"     "Apple" "b"     "Apple" "c"    
-#&gt; [10] "b"    </div><div class='input'><span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"Banana"</span>)</div><div class='output co'>#&gt;  [1] "c"      "Apple"  "Banana" "c"      "Banana" "Apple"  "Banana" "Apple" 
-#&gt;  [9] "c"      "Banana"</div><div class='input'>
+<span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>)</div><div class='output co'>#&gt;  [1] "c"     "c"     "c"     "b"     "b"     "Apple" "b"     "Apple" "b"    
+#&gt; [10] "Apple"</div><div class='input'><span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"Banana"</span>)</div><div class='output co'>#&gt;  [1] "c"      "c"      "c"      "Banana" "Banana" "Apple"  "Banana" "Apple" 
+#&gt;  [9] "Banana" "Apple" </div><div class='input'>
 <span class='co'># Use .default as replacement for unmatched values. Note that NA and</span>
 <span class='co'># replacement values need to be of the same type. For more information, see</span>
 <span class='co'># https://adv-r.hadley.nz/vectors-chap.html#missing-values</span>
-<span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"Banana"</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>)</div><div class='output co'>#&gt;  [1] NA       "Apple"  "Banana" NA       "Banana" "Apple"  "Banana" "Apple" 
-#&gt;  [9] NA       "Banana"</div><div class='input'>
+<span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"Banana"</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>)</div><div class='output co'>#&gt;  [1] NA       NA       NA       "Banana" "Banana" "Apple"  "Banana" "Apple" 
+#&gt;  [9] "Banana" "Apple" </div><div class='input'>
 <span class='co'># Throws an error as NA is logical, not character.</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>recode</span>(<span class='no'>char_vec</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"Apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"Banana"</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
@@ -285,8 +316,8 @@ package for more tools for working with factors and their levels.</p>
 
 <span class='co'># Use a named character vector for unquote splicing with !!!</span>
 <span class='no'>level_key</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"banana"</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='st'>"carrot"</span>)
-<span class='fu'>recode</span>(<span class='no'>char_vec</span>, !!!<span class='no'>level_key</span>)</div><div class='output co'>#&gt;  [1] "carrot" "apple"  "banana" "carrot" "banana" "apple"  "banana" "apple" 
-#&gt;  [9] "carrot" "banana"</div><div class='input'>
+<span class='fu'>recode</span>(<span class='no'>char_vec</span>, !!!<span class='no'>level_key</span>)</div><div class='output co'>#&gt;  [1] "carrot" "carrot" "carrot" "banana" "banana" "apple"  "banana" "apple" 
+#&gt;  [9] "banana" "apple" </div><div class='input'>
 <span class='co'># For numeric values, named arguments can also be used</span>
 <span class='no'>num_vec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='fl'>NA</span>)
 <span class='fu'>recode</span>(<span class='no'>num_vec</span>, <span class='kw'>`2`</span> <span class='kw'>=</span> <span class='fl'>20L</span>, <span class='kw'>`4`</span> <span class='kw'>=</span> <span class='fl'>40L</span>)</div><div class='output co'>#&gt; [1]  1 20  3 40 NA</div><div class='input'>
@@ -321,19 +352,13 @@ package for more tools for working with factors and their levels.</p>
 #&gt; Levels: z y a</div><div class='input'>
 <span class='co'># Use a named character vector to recode factors with unquote splicing.</span>
 <span class='no'>level_key</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>"apple"</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='st'>"banana"</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='st'>"carrot"</span>)
-<span class='fu'>recode_factor</span>(<span class='no'>char_vec</span>, !!!<span class='no'>level_key</span>)</div><div class='output co'>#&gt;  [1] carrot apple  banana carrot banana apple  banana apple  carrot banana
+<span class='fu'>recode_factor</span>(<span class='no'>char_vec</span>, !!!<span class='no'>level_key</span>)</div><div class='output co'>#&gt;  [1] carrot carrot carrot banana banana apple  banana apple  banana apple 
 #&gt; Levels: apple banana carrot</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,11 +55,13 @@
 <meta property="og:description" content="These objects are imported from other packages. Follow the links
 below to see their documentation.
 
+  genericsintersect, setdiff, setequal, union
+
   magrittr%&amp;gt;%
 
   tibbleadd_row, as_data_frame, as_tibble, data_frame, data_frame_, frame_data, glimpse, lst, lst_, tbl_sum, tibble, tribble, trunc_mat, type_sum, view
 
-  tidyselectcontains, ends_with, everything, last_col, matches, num_range, one_of, starts_with
+  tidyselectall_of, any_of, contains, ends_with, everything, last_col, matches, num_range, one_of, starts_with
 
 " />
 <meta property="og:image" content="https://dplyr.tidyverse.org/logo.png" />
@@ -85,7 +91,7 @@ below to see their documentation.
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -100,16 +106,16 @@ below to see their documentation.
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">dplyr</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9003</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/dplyr.html">Intro</a>
+  <a href="../articles/dplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -122,19 +128,28 @@ below to see their documentation.
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/grouping.html">Grouped data</a>
+    </li>
+    <li>
       <a href="../articles/two-table.html">Two-table verbs</a>
     </li>
     <li>
-      <a href="../articles/window-functions.html">Window functions</a>
+      <a href="../articles/base.html">dplyr &lt;-&gt; base R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Automation</li>
+    <li>
+      <a href="../articles/colwise.html">Column-wise operations</a>
     </li>
     <li>
-      <a href="http://dbplyr.tidyverse.org/articles/dbplyr.html">Databases with dbplyr</a>
+      <a href="../articles/rowwise.html">Row-wise operations</a>
     </li>
     <li>
       <a href="../articles/programming.html">Programming with dplyr</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../articles/compatibility.html">Compatibility</a>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -145,7 +160,7 @@ below to see their documentation.
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/10/dplyr-0-8-4/">Version 0.8.4</a>
     </li>
@@ -164,14 +179,15 @@ below to see their documentation.
     <li>
       <a href="https://www.tidyverse.org/articles/2018/06/dplyr-0.7.5/">Version 0.7.5</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/dplyr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/dplyr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -195,19 +211,21 @@ below to see their documentation.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Objects exported from other packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/dplyr/blob/master/R/reexport-tibble.r'><code>R/reexport-tibble.r</code></a>, <a href='https://github.com/tidyverse/dplyr/blob/master/R/reexport-tidyselect.R'><code>R/reexport-tidyselect.R</code></a>, <a href='https://github.com/tidyverse/dplyr/blob/master/R/utils.r'><code>R/utils.r</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/dplyr/blob/master/R/reexport-tibble.r'><code>R/reexport-tibble.r</code></a>, <a href='https://github.com/tidyverse/dplyr/blob/master/R/select-helpers.R'><code>R/select-helpers.R</code></a>, <a href='https://github.com/tidyverse/dplyr/blob/master/R/sets.r'><code>R/sets.r</code></a>, and 1 more</small>
     <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>These objects are imported from other packages. Follow the links
 below to see their documentation.</p>
-<dl class='dl-horizontal'>
+<dl>
+  <dt>generics</dt><dd><p><code><a href='https://rdrr.io/pkg/generics/man/setops.html'>intersect</a></code>, <code><a href='https://rdrr.io/pkg/generics/man/setops.html'>setdiff</a></code>, <code><a href='https://rdrr.io/pkg/generics/man/setops.html'>setequal</a></code>, <code><a href='https://rdrr.io/pkg/generics/man/setops.html'>union</a></code></p></dd>
+
   <dt>magrittr</dt><dd><p><code>%&gt;%</code></p></dd>
 
   <dt>tibble</dt><dd><p><code><a href='https://tibble.tidyverse.org/reference/add_row.html'>add_row</a></code>, <code><a href='https://tibble.tidyverse.org/reference/deprecated.html'>as_data_frame</a></code>, <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></code>, <code><a href='https://tibble.tidyverse.org/reference/deprecated.html'>data_frame</a></code>, <code><a href='https://tibble.tidyverse.org/reference/deprecated.html'>data_frame_</a></code>, <code><a href='https://tibble.tidyverse.org/reference/deprecated.html'>frame_data</a></code>, <code><a href='https://tibble.tidyverse.org/reference/glimpse.html'>glimpse</a></code>, <code><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></code>, <code><a href='https://tibble.tidyverse.org/reference/deprecated.html'>lst_</a></code>, <code><a href='https://tibble.tidyverse.org/reference/tbl_sum.html'>tbl_sum</a></code>, <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></code>, <code><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></code>, <code><a href='https://tibble.tidyverse.org/reference/formatting.html'>trunc_mat</a></code>, <code><a href='https://tibble.tidyverse.org/reference/reexports.html'>type_sum</a></code>, <code><a href='https://tibble.tidyverse.org/reference/view.html'>view</a></code></p></dd>
 
-  <dt>tidyselect</dt><dd><p><code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>contains</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>ends_with</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>everything</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>last_col</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>matches</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>num_range</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/one_of.html'>one_of</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>starts_with</a></code></p></dd>
+  <dt>tidyselect</dt><dd><p><code><a href='https://tidyselect.r-lib.org/reference/all_of.html'>all_of</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/all_of.html'>any_of</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>ends_with</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/everything.html'>last_col</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>matches</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>num_range</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/one_of.html'>one_of</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></code></p></dd>
 
 </dl>
     </div>
@@ -216,11 +234,10 @@ below to see their documentation.</p>
 
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

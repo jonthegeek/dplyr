@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -87,7 +91,7 @@ each group." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -102,16 +106,16 @@ each group." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">dplyr</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9003</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/dplyr.html">Intro</a>
+  <a href="../articles/dplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -124,19 +128,28 @@ each group." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/grouping.html">Grouped data</a>
+    </li>
+    <li>
       <a href="../articles/two-table.html">Two-table verbs</a>
     </li>
     <li>
-      <a href="../articles/window-functions.html">Window functions</a>
+      <a href="../articles/base.html">dplyr &lt;-&gt; base R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Automation</li>
+    <li>
+      <a href="../articles/colwise.html">Column-wise operations</a>
     </li>
     <li>
-      <a href="http://dbplyr.tidyverse.org/articles/dbplyr.html">Databases with dbplyr</a>
+      <a href="../articles/rowwise.html">Row-wise operations</a>
     </li>
     <li>
       <a href="../articles/programming.html">Programming with dplyr</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../articles/compatibility.html">Compatibility</a>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -147,7 +160,7 @@ each group." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/10/dplyr-0-8-4/">Version 0.8.4</a>
     </li>
@@ -166,14 +179,15 @@ each group." />
     <li>
       <a href="https://www.tidyverse.org/articles/2018/06/dplyr-0.7.5/">Version 0.7.5</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/dplyr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/dplyr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -255,10 +269,11 @@ is recalculated based on the resulting data, otherwise the grouping is kept as i
     <tr>
       <th>n, prop</th>
       <td><p>Provide either <code>n</code>, the number of rows, or <code>prop</code>, the
-proportion of rows to select. If <code>n</code> is greater than the number of
-rows in the group (or <code>prop &gt; 1</code>), it will be silently truncated to the
-group size. If the <code>prop</code>ortion of a group size is not an integer, it will
-be rounded down.</p></td>
+proportion of rows to select. If neither are supplied, <code>n = 1</code> will be
+used.</p>
+<p>If <code>n</code> is greater than the number of rows in the group (or <code>prop &gt; 1</code>),
+the result will be silently truncated to the group size. If the
+<code>prop</code>ortion of a group size is not an integer, it is rounded down.</p></td>
     </tr>
     <tr>
       <th>order_by</th>
@@ -285,7 +300,8 @@ automatically standardised to sum to 1.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of the same type as <code>.data</code>.</p><ul>
+    <p>An object of the same type as <code>.data</code>. The output has the following
+properties:</p><ul>
 <li><p>Each row may appear 0, 1, or many times in the output.</p></li>
 <li><p>Columns are not modified.</p></li>
 <li><p>Groups are not modified.</p></li>
@@ -431,26 +447,26 @@ individual methods for extra arguments and differences in behaviour.</p>
 #&gt; Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</div><div class='input'><span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_min</span>(<span class='no'>cyl</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>with_ties</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;             mpg cyl disp hp drat   wt  qsec vs am gear carb
 #&gt; Datsun 710 22.8   4  108 93 3.85 2.32 18.61  1  1    4    1</div><div class='input'>
 <span class='co'># slice_sample() allows you to random select with or without replacement</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_sample</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-#&gt; Merc 230           22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-#&gt; Valiant            18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-#&gt; Lotus Europa       30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-#&gt; Porsche 914-2      26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-#&gt; Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4</div><div class='input'><span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_sample</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-#&gt; Dodge Challenger  15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-#&gt; Fiat X1-9         27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-#&gt; Merc 450SLC...3   15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-#&gt; Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-#&gt; Merc 450SLC...5   15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3</div><div class='input'>
+<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_sample</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;                   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+#&gt; Mazda RX4        21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+#&gt; Toyota Corolla   33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+#&gt; Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+#&gt; Merc 450SLC      15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+#&gt; Ford Pantera L   15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4</div><div class='input'><span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_sample</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+#&gt; Datsun 710...1 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+#&gt; Merc 280       19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+#&gt; Datsun 710...3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+#&gt; Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+#&gt; Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</div><div class='input'>
 <span class='co'># you can optionally weight by a variable - this code weights by the</span>
 <span class='co'># physical weight of the cars, so heavy cars are more likely to get</span>
 <span class='co'># selected</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_sample</span>(<span class='kw'>weight_by</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-#&gt; AMC Javelin        15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-#&gt; Merc 450SE         16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-#&gt; Dodge Challenger   15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-#&gt; Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-#&gt; Merc 240D          24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</div><div class='input'>
+<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>slice_sample</span>(<span class='kw'>weight_by</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#&gt; Volvo 142E        21.4   4  121 109 4.11 2.780 18.60  1  1    4    2
+#&gt; Chrysler Imperial 14.7   8  440 230 3.23 5.345 17.42  0  0    3    4
+#&gt; Duster 360        14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
+#&gt; Ferrari Dino      19.7   6  145 175 3.62 2.770 15.50  0  1    5    6
+#&gt; AMC Javelin       15.2   8  304 150 3.15 3.435 17.30  0  0    3    2</div><div class='input'>
 <span class='co'># Group wise operation ----------------------------------------</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
   <span class='kw'>group</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>4</span>)),
@@ -459,24 +475,24 @@ individual methods for extra arguments and differences in behaviour.</p>
 
 <span class='co'># All slice helpers operate per group, silently truncating to the group</span>
 <span class='co'># size, so the following code works without error</span>
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>group</span>) <span class='kw'>%&gt;%</span> <span class='fu'>slice_head</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 2
-#&gt; # Groups:   group [3]
+<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>group</span>) <span class='kw'>%&gt;%</span> <span class='fu'>slice_head</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 2</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   group [3]</span><span>
 #&gt;   group      x
-#&gt;   &lt;chr&gt;  &lt;dbl&gt;
-#&gt; 1 a     0.0438
-#&gt; 2 b     0.982 
-#&gt; 3 b     0.0819
-#&gt; 4 c     0.542 
-#&gt; 5 c     0.610 </div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> a     0.916 
+#&gt; </span><span style='color: #555555;'>2</span><span> b     0.061</span><span style='text-decoration: underline;'>8</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> b     0.778 
+#&gt; </span><span style='color: #555555;'>4</span><span> c     0.828 
+#&gt; </span><span style='color: #555555;'>5</span><span> c     0.507 </div><div class='input'>
 <span class='co'># When specifying the proportion of rows to include non-integer sizes</span>
 <span class='co'># are rounded down, so group a gets 0 rows</span>
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>group</span>) <span class='kw'>%&gt;%</span> <span class='fu'>slice_head</span>(<span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
-#&gt; # Groups:   group [2]
-#&gt;   group     x
-#&gt;   &lt;chr&gt; &lt;dbl&gt;
-#&gt; 1 b     0.982
-#&gt; 2 c     0.542
-#&gt; 3 c     0.610</div><div class='input'>
+<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>group</span>) <span class='kw'>%&gt;%</span> <span class='fu'>slice_head</span>(<span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 2</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   group [2]</span><span>
+#&gt;   group      x
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> b     0.061</span><span style='text-decoration: underline;'>8</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> c     0.828 
+#&gt; </span><span style='color: #555555;'>3</span><span> c     0.507 </div><div class='input'>
 <span class='co'># Filter equivalents --------------------------------------------</span>
 <span class='co'># slice() expressions can often be written to use `filter()` and</span>
 <span class='co'># `row_number()`, which can also be translated to SQL. For many databases,</span>
@@ -511,19 +527,12 @@ individual methods for extra arguments and differences in behaviour.</p>
 #&gt; Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
 #&gt; Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 #&gt; Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
-#&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</div></pre>
+#&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

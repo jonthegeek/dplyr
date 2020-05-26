@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extending dplyr — dplyr_extending • dplyr</title>
+<title>Extending dplyr with new data frame subclasses — dplyr_extending • dplyr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -47,17 +51,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Extending dplyr — dplyr_extending" />
+<meta property="og:title" content="Extending dplyr with new data frame subclasses — dplyr_extending" />
 <meta property="og:description" content="
 These three functions, along with names&amp;lt;- and 1d numeric [
-(i.e. x[loc]), provide a minimal interface for extending dplyr to work
-with a new subclass of data frame. dplyr_rows_slice() and
-dplyr_cols_modify() represented specialised uses of [; their focus
-makes them much easier to implement. dplyr_reconstruct() is a fall-back
-for verbs that can't be implemented in terms of simpler row/col operation.
-These functions are experimental and are stop-gap measure until more general
-tools become available in vctrs, but may still be useful in the short-term
-if you have a data frame class that you want to work with dplyr." />
+(i.e. x[loc]) methods, provide a minimal interface for extending dplyr
+to work with new data frame subclasses. This means that for simple cases
+you should only need to provide a couple of methods, rather than a method
+for every dplyr verb.
+These functions are a stop-gap measure until we figure out how to solve
+the problem more generally, but it's likely that any code you write to
+implement them will find a home in what comes next." />
 <meta property="og:image" content="https://dplyr.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -85,7 +88,7 @@ if you have a data frame class that you want to work with dplyr." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -100,16 +103,16 @@ if you have a data frame class that you want to work with dplyr." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">dplyr</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.8.99.9003</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/dplyr.html">Intro</a>
+  <a href="../articles/dplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -122,19 +125,28 @@ if you have a data frame class that you want to work with dplyr." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/grouping.html">Grouped data</a>
+    </li>
+    <li>
       <a href="../articles/two-table.html">Two-table verbs</a>
     </li>
     <li>
-      <a href="../articles/window-functions.html">Window functions</a>
+      <a href="../articles/base.html">dplyr &lt;-&gt; base R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Automation</li>
+    <li>
+      <a href="../articles/colwise.html">Column-wise operations</a>
     </li>
     <li>
-      <a href="http://dbplyr.tidyverse.org/articles/dbplyr.html">Databases with dbplyr</a>
+      <a href="../articles/rowwise.html">Row-wise operations</a>
     </li>
     <li>
       <a href="../articles/programming.html">Programming with dplyr</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../articles/compatibility.html">Compatibility</a>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -145,7 +157,7 @@ if you have a data frame class that you want to work with dplyr." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/10/dplyr-0-8-4/">Version 0.8.4</a>
     </li>
@@ -164,14 +176,15 @@ if you have a data frame class that you want to work with dplyr." />
     <li>
       <a href="https://www.tidyverse.org/articles/2018/06/dplyr-0.7.5/">Version 0.7.5</a>
     </li>
+    <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/dplyr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/dplyr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -194,7 +207,7 @@ if you have a data frame class that you want to work with dplyr." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extending dplyr</h1>
+    <h1>Extending dplyr with new data frame subclasses</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/dplyr/blob/master/R/generics.R'><code>R/generics.R</code></a></small>
     <div class="hidden name"><code>dplyr_extending.Rd</code></div>
     </div>
@@ -202,14 +215,13 @@ if you have a data frame class that you want to work with dplyr." />
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
 <p>These three functions, along with <code>names&lt;-</code> and 1d numeric <code>[</code>
-(i.e. <code>x[loc]</code>), provide a minimal interface for extending dplyr to work
-with a new subclass of data frame. <code>dplyr_rows_slice()</code> and
-<code>dplyr_cols_modify()</code> represented specialised uses of <code>[</code>; their focus
-makes them much easier to implement. <code>dplyr_reconstruct()</code> is a fall-back
-for verbs that can't be implemented in terms of simpler row/col operation.</p>
-<p>These functions are experimental and are stop-gap measure until more general
-tools become available in vctrs, but may still be useful in the short-term
-if you have a data frame class that you want to work with dplyr.</p>
+(i.e. <code>x[loc]</code>) methods, provide a minimal interface for extending dplyr
+to work with new data frame subclasses. This means that for simple cases
+you should only need to provide a couple of methods, rather than a method
+for every dplyr verb.</p>
+<p>These functions are a stop-gap measure until we figure out how to solve
+the problem more generally, but it's likely that any code you write to
+implement them will find a home in what comes next.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dplyr_row_slice</span>(<span class='no'>data</span>, <span class='no'>i</span>, <span class='no'>...</span>)
@@ -241,6 +253,35 @@ an existing column.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="basic-advice"><a class="anchor" href="#basic-advice"></a>Basic advice</h2>
+
+    <p>This section gives you basic advice if you want to extend dplyr to work with
+your custom data frame subclass, and you want the dplyr methods to behave
+in basically the same way.</p><ul>
+<li><p>If you have data frame attributes that don't depend on the rows or columns
+(and should unconditionally be preserved), you don't need to do anything.</p></li>
+<li><p>If you have <strong>scalar</strong> attributes that depend on <strong>rows</strong>, implement a
+<code>dplyr_reconstruct()</code> method. Your method should recompute the attribute
+depending on rows now present.</p></li>
+<li><p>If you have <strong>scalar</strong> attributes that depend on <strong>columns</strong>, implement a
+<code>dplyr_reconstruct()</code> method and a 1d <code>[</code> method. For example, if your
+class requires that certain columns be present, your method should return
+a data.frame or tibble when those columns are removed.</p></li>
+<li><p>If your attributes are <strong>vectorised</strong> over <strong>rows</strong>, implement a
+<code>dplyr_row_slice()</code> method. This gives you access to <code>i</code> so you can
+modify the row attribute accordingly. You'll also need to think carefully
+about how to recompute the attribute in <code>dplyr_reconstruct()</code>, and
+you will need to carefully verify the behaviour of each verb, and provide
+additional methods as needed.</p></li>
+<li><p>If your attributes that are <strong>vectorised</strong> over <strong>columns</strong>, implement
+<code>dplyr_col_modify()</code>, 1d <code>[</code>, and <code>names&lt;-</code> methods. All of these methods
+know which columns are being modified, so you can update the column
+attribute according. You'll also need to think carefully about how to
+recompute the attribute in <code>dplyr_reconstruct()</code>, and you will need to
+carefully verify the behaviour of each verb, and provide additional
+methods as needed.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="current-usage"><a class="anchor" href="#current-usage"></a>Current usage</h2>
 
     
@@ -269,13 +310,10 @@ select distinct rows.</p></li>
 you'll need to provide methods directly.</p>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#current-usage">Current usage</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
